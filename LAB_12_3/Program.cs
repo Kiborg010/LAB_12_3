@@ -40,7 +40,35 @@ namespace LAB_12_3
             string trashAnswer = Console.ReadLine();
         }
 
-
+        static Car[] CreateListWithRandomCars(int lenght)
+        {
+            List<Car> cars = new List<Car>();
+            for (int i = 0; i < lenght; i++)
+            {
+                Random random = new Random();
+                int type = random.Next(0, 4); //Случайное число от 0 до 3
+                Car car = new Car();
+                if (type == 0) //В зависимости от числа выибраем тип
+                {
+                    car = new Car(); //Создаём машину нужного типа
+                }
+                else if (type == 1) //В зависимости от типа создаём определённую машину
+                {
+                    car = new LorryCar();
+                }
+                else if (type == 2)
+                {
+                    car = new PassengerCar();
+                }
+                else if (type == 3)
+                {
+                    car = new OffRoadCar();
+                }
+                car.RandomInit(); //Заполняем случайными значениями
+                cars.Add(car);
+            }
+            return cars.ToArray();
+        }
 
         static void Main(string[] args)
         {
@@ -112,29 +140,48 @@ namespace LAB_12_3
                             int lenght = CorrectInputInt(-100, 100, "количество элементов в ИСД");
                             try
                             {
-                                Car car1 = new Car();
-                                car1.id.number = 1;
-                                Car car2 = new Car();
-                                car2.id.number = 2;
-                                Car car3 = new Car();
-                                car3.id.number = 3;
-                                Car car4 = new Car();
-                                car4.id.number = 4;
-                                Car car5 = new Car();
-                                car5.id.number = 5;
-                                Car car6 = new Car();
-                                car6.id.number = 6;
-                                Car car7 = new Car();
-                                car7.id.number = 7;
-                                Car car8 = new Car();
-                                car8.id.number = 8;
-                                Car car9 = new Car();
-                                car9.id.number = 9;
-                                Car car10 = new Car();
-                                car10.id.number = 10;
-                                Car[] array = { car1, car2, car3, car4, car5, car6, car7, car8, car9, car10};
+                                //Car car1 = new Car();
+                                //car1.RandomInit();
+                                //Car car2 = new Car();
+                                //car2.RandomInit();
+                                //Car car3 = new Car();
+                                //car3.RandomInit();
+                                //Car car4 = new Car();
+                                //car4.RandomInit();
+                                //Car car5 = new Car();
+                                //car5.RandomInit();
+                                //Car car6 = new Car();
+                                //car6.RandomInit();
+
+                                //Car car1 = new Car("Volkswagen", 1991, "Green", 3424264, 50, 20);
+                                //Car car2 = new Car("Ford", 1996, "Grey", 2544300, 168, 21);
+                                //Car car3 = new Car("Lada", 2002, "White", 26710595, 159, 22);
+
+                                //Car car1 = new Car("Volkswagen", 2000, "1", 1, 1, 1);
+                                //Car car2 = new Car("Ford", 2000, "1", 1, 1, 1);
+                                //Car car3 = new Car("Lada", 2000, "1", 1, 1, 1);
+
+                                //Car car1 = new Car("3", 2000, "1", 1, 1, 1);
+                                //Car car2 = new Car("5", 2000, "1", 1, 1, 1);
+                                //Car car3 = new Car("4", 2000, "1", 1, 1, 1);
+
+                                //Car[] array = {car1, car2, car3};
+
+                                Car[] array = CreateListWithRandomCars(lenght);
                                 MyRedBlackTree<Car> tree1 = new MyRedBlackTree<Car>(array);
-                                tree1.ShowTree();
+                                try
+                                {
+                                    tree1.ShowTree();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    Console.WriteLine("\n\n");
+                                    foreach (Car el in array)
+                                    {
+                                        Console.WriteLine(el.ToString());
+                                    }
+                                }
                             }
                             catch (Exception ex)
                             {

@@ -222,9 +222,13 @@ namespace ClassLibrary1
 
         public virtual string ToString() //Метод для генерации строки (виртуальная функция)
         {
-            return $"{id.Number}";
             return $"Общая информация: |Бренд: {Brend}| Год: {Year}| Цвет: {Colour}| Цена: {Cost} рублей| Дорожный просвет: {Clearance} мм| id: {id.number}|";
         }
+
+        //public string ToString() //Метод для генерации строки (виртуальная функция)
+        //{
+        //    return $"Car: {id.Number}";
+        //}
 
         public string Show() //Метод для генерации строки (обычная функция)
         {
@@ -306,6 +310,7 @@ namespace ClassLibrary1
                 return -1;
             }
             Car car = obj as Car;
+            //return ComparerInt(this.Cost, car.Cost);
             List<int> flags = new List<int>(); // Лист для хранения всех результатов сравнения
             flags.Add(String.Compare(this.Brend, car.Brend)); // Добавляем их
             flags.Add(ComparerInt(this.Year, car.Year));

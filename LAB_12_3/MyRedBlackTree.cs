@@ -19,24 +19,110 @@ namespace LAB_12_3
 
         public void ShowTree()
         {
-            Show(root);
+            Show2(root);
         }
 
-        void Show(Point<T>? point, int spaces = 5)
+        void Show1(Point<T>? point, int spaces = 5)
         {
-            //if (point.ToString() != "")
-            //{
-            //    Console.WriteLine(point.Data.ToString());
-            //}
+            string m = "<Нет>";
+            if (point.ToString() != "")
+            {
+                if (spaces > 50)
+                {
+                    throw new Exception("AAAAAAAAAAAAaa");
+                }
+                Console.WriteLine($"Элемент: {point.Data.ToString()}");
+                m = point.Data.ToString();
+            }
             if (point.ToString() != "")//point != null )
             {
-                Show(point.Right, spaces + 5);
+                
+                Console.WriteLine($"Справа от {m}");
+                Show1(point.Right, spaces + 5);
+                Console.WriteLine($"Слева от {m}");
+                Show1(point.Left, spaces + 5);
+            }
+        }
+
+        void Show2(Point<T>? point, int spaces = 5)
+        {
+            if (point.ToString() != "")//point != null )
+            {
+                Show2(point.Right, spaces + 5);
                 for (int i = 0; i < spaces; i++)
                 {
                     Console.Write(" ");
                 }
                 Console.WriteLine($"{point.Data.ToString()}  Цвет: {point.Colour}");
-                Show(point.Left, spaces + 5);
+                Show2(point.Left, spaces + 5);
+            }
+        }
+
+        public void Remove(T el)
+        {
+            Point<T> el1 = new Point<T>(el, "");
+            Point<T> el2 = FindElement(root, el1);
+            if (el2 == null)
+            {
+                Console.WriteLine("Элемент не найден");
+            }
+            else
+            {
+                Console.WriteLine("Элемент найден");
+                if (el2.Left.Data == null && el2.Right.Data == null)
+                {
+                    Point<T> dad = el2.Parent;
+                    if (dad.Left == el2)
+                    {
+                        dad.Left = new Point<T>();
+                    }
+                    else if (dad.Right == el2)
+                    {
+                        dad.Right = new Point<T>();
+                    }
+                    el2.Parent = null;
+                }
+            }
+        }
+
+        public void Find(T el)
+        {
+            Point<T> el1 = new Point<T>(el, ""); 
+            Point<T> el2 = FindElement(root, el1);
+            if (el2 == null)
+            {
+                Console.WriteLine("Элемент не найден");
+            }
+            else
+            {
+                Console.WriteLine("Элемент найден");
+            }
+        }
+
+        Point<T> FindElement(Point<T> current, Point<T> element)
+        {
+            if (current.Data == null)
+            {
+                return null;
+            }
+            int comparing = current.Data.CompareTo(element.Data);
+            if (comparing == -1)
+            {
+                Point<T> el = FindElement(current.Right, element);
+                return el;
+            }
+            else if (comparing == 0)
+            {
+                return current;
+            }
+            else if (comparing == 1)
+            {
+                Point<T> el = FindElement(current.Left, element);
+                return el;
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -99,6 +185,7 @@ namespace LAB_12_3
                             granddad.Left = son;
                             son.Left = dad;
                             dad.Parent = son;
+                            dad.Right = new Point<T>();
 
                             Point<T> brother = son.Right;
                             son.Right = granddad;
@@ -123,7 +210,7 @@ namespace LAB_12_3
                             }
                             else if (grandgranddad == null)
                             {
-                                root = dad;
+                                root = son;
                             }
                         }
                         else if (dad.Left == son)
@@ -163,6 +250,7 @@ namespace LAB_12_3
                             granddad.Right = son;
                             son.Right = dad;
                             dad.Parent = son;
+                            dad.Left = new Point<T>();
 
                             Point<T> brother = son.Left;
                             son.Left = granddad;
@@ -187,7 +275,7 @@ namespace LAB_12_3
                             }
                             else if (grandgranddad == null)
                             {
-                                root = dad;
+                                root = son;
                             }
                         }
                         else if (dad.Right == son)
@@ -229,6 +317,10 @@ namespace LAB_12_3
 
         Point<T> MakeTree(T[] array)
         {
+            if (array.Distinct().Count() != array.Length)
+            {
+                throw new Exception("В переданном массиве есть повторяющиеся элементы. В дереве все элементы должны быть уникальны");
+            }
             Point<T> begin = new Point<T>(array[0], "black");
             root = begin;
             begin.Left = new Point<T>();
@@ -237,54 +329,55 @@ namespace LAB_12_3
             foreach (T el in array)
             {
                 Point<T> newItem = new Point<T>(el, "red");
-                Point<T> current = root;
-                Point<T> previous = root;
-                bool flag = false;
-                int n = 0;
-                while (!flag)
+
+                Point<T> check = FindElement(root, newItem);
+                if (check != null)
                 {
-                    if (current.ToString() == "")
+                    Console.WriteLine($"Элемент {newItem.Data.ToString()} не может быть добавлен, так как он уже есть в дереве");
+                }
+                else
+                {
+                    Point<T> current = root;
+                    Point<T> previous = root;
+                    bool flag = false;
+                    int n = 0;
+                    while (!flag)
                     {
-                        current = newItem;
-                        current.Parent = previous;
-                        current.Left = new Point<T>();
-                        current.Right = new Point<T>();
-
-                        Point<T> uncle = FindUncle(current);
-
-                        if (n < 0)
+                        if (current.ToString() == "")
                         {
-                            previous.Left = newItem;
-                        }
-                        else if (n > 0)
-                        {
-                            previous.Right = newItem;
-                        }
-                        
+                            current = newItem;
+                            current.Parent = previous;
+                            current.Left = new Point<T>();
+                            current.Right = new Point<T>();
 
-                        if (newItem.Data.ToString() == "26")
-                        {
+                            Point<T> uncle = FindUncle(current);
+
+                            if (n < 0)
+                            {
+                                previous.Left = newItem;
+                            }
+                            else if (n > 0)
+                            {
+                                previous.Right = newItem;
+                            }
+
                             Change(current, uncle);
+                            flag = true;
+                            //Show(root);
+                            //Console.WriteLine("\n\n");
                         }
-                        else
+                        else if (newItem.Data.CompareTo(current.Data) < 0)
                         {
-                            Change(current, uncle);
+                            previous = current;
+                            current = current.Left;
+                            n = -1;
                         }
-                        flag = true;
-                        Show(root);
-                        Console.WriteLine("\n\n");
-                    }
-                    else if (newItem.Data.CompareTo(current.Data) < 0)
-                    {
-                        previous = current;
-                        current = current.Left;
-                        n = -1;
-                    }
-                    else if (newItem.Data.CompareTo(current.Data) > 0)
-                    {
-                        previous = current;
-                        current = current.Right;
-                        n = 1;
+                        else if (newItem.Data.CompareTo(current.Data) > 0)
+                        {
+                            previous = current;
+                            current = current.Right;
+                            n = 1;
+                        }
                     }
                 }
             }

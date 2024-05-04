@@ -87,6 +87,11 @@ namespace ClassLibrary1
             return base.ToString() + $"\nДополнительная информация: |Количество мест: {CountSeats}| Максимальная скорость: {MaxSpeed} км/ч| ";
         }
 
+        //public string ToString() //Метод приведения к строке (виртуальная функция)
+        //{
+        //    return $"PassengerCar: {id.Number}";
+        //}
+
         public string Show() //Метод приведения к строке (обычная функция)
         {
             return base.ToString() + $"\nДополнительная информация: |Количество мест: {CountSeats}| Максимальная скорость: {MaxSpeed} км/ч| ";

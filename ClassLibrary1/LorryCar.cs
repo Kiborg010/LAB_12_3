@@ -65,6 +65,11 @@ namespace ClassLibrary1
             return base.ToString() + $"\nДополнительная информация: |Грузоподъёмность: {Tonnage} тонн|";
         }
 
+        //public string ToString() //Метод для вывода строки для печати (виртуальная функция)
+        //{
+        //    return $"LorryCar: {id.Number}";
+        //}
+
         public string Show() //Метод для вывода строки для печати (обычная функция)
         {
             return base.ToString() + $"\nДополнительная информация: |Грузоподъёмность: {Tonnage} тонн|";
