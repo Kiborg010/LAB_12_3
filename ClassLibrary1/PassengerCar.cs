@@ -84,13 +84,9 @@ namespace ClassLibrary1
 
         public override string ToString() //Метод приведения к строке (виртуальная функция)
         {
-            return base.ToString() + $"\nДополнительная информация: |Количество мест: {CountSeats}| Максимальная скорость: {MaxSpeed} км/ч| ";
+            return $"PassengerCar({Brend}, {Year}, {Colour}, {Cost}, {Clearance}, {id.number}, {CountSeats}, {MaxSpeed})";
+            //return base.ToString() + $"\nДополнительная информация: |Количество мест: {CountSeats}| Максимальная скорость: {MaxSpeed} км/ч| ";
         }
-
-        //public string ToString() //Метод приведения к строке (виртуальная функция)
-        //{
-        //    return $"PassengerCar: {id.Number}";
-        //}
 
         public string Show() //Метод приведения к строке (обычная функция)
         {

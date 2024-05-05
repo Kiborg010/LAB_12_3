@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LAB_12_3
 {
-    internal class Point<T> where T: IComparable
+    public class Point<T> where T: IComparable
     {
         public T? Data { get; set; }
         public Point<T>? Left { get; set; }

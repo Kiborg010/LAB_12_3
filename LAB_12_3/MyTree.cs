@@ -9,77 +9,56 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LAB_12_3
 {
-    internal class MyTree<T> where T : IInit, IComparable, new()
+    public class MyTree<T> where T : IInit, IComparable, new()
     {
         public Point<T>? root = null;
-        int count = 0;
+        public int count = 0;
         public int Count => count;
-        public MyTree(int lenght)
-        {
-            count = lenght;
-            root = MakeTree(lenght, root);
+        public MyTree(T[] array)
+        { 
+            if (array is null)
+            {
+                root = null;
+            }
+            else
+            {
+                root = MakeTree(array);
+            }
         }
 
         public void ShowTree()
         {
+            if (root == null)
+            {
+                throw new Exception("Дерево пустое");
+            }
             Show(root);
         }
 
-        Point<T> MakeTree(int lenght, Point<T>? point)
+        public void Clear()
         {
-            if (lenght < 0)
-            {
-                throw new Exception("Количество элементов в дереве не может быть меньше нуля");
-            }
-            T data = new T();
-            data.RandomInit();
-            Point<T> newItem = new Point<T>(data, "");
-            if (lenght == 0)
+            root = null;
+            count = 0;
+        }
+
+        Point<T> MakeTree(T[] array)
+        {
+            if (array.Length == 0)
             {
                 return null;
             }
+            count++;
+            T data = array[0];
+            array = array.Skip(1).ToArray();
+            int lenght = array.Length;
+            Point<T> newItem = new Point<T>(data, "");
             int nl = lenght / 2;
-            int nr = lenght - nl - 1;
-            newItem.Left = MakeTree(nl, newItem.Left);
-            newItem.Right = MakeTree(nr, newItem.Right);
+            int nr = lenght - nl;
+            T[] segmentNL = new ArraySegment<T>(array, 0, nl).ToArray();
+            T[] segmentNR = new ArraySegment<T>(array, nl, nr).ToArray();
+            newItem.Left = MakeTree(segmentNL);
+            newItem.Right = MakeTree(segmentNR);
             return newItem;
-        }
-
-        public int CountingLeaps(Point<T>? point, int count)
-        {
-            if (point.Right == null && point.Left == null)
-            {
-                Console.WriteLine(point.Data.ToString());
-                return count + 1;
-            }
-            if (point.Left != null && point.Right != null)
-            {
-                count = CountingLeaps(point.Left, count);
-                count = CountingLeaps(point.Right, count);
-            }
-            else if (point.Left != null)
-            {
-                count = CountingLeaps(point.Left, count);
-            }
-            else if (point.Right != null)
-            {
-                count = CountingLeaps(point.Right, count);
-            }
-            return count;
-        }
-
-        void Show(Point<T>? point, int spaces = 5)
-        {
-            if (point != null)
-            {
-                Show(point.Left, spaces + 5);
-                for (int i = 0; i < spaces; i++)
-                {
-                    Console.Write(" ");
-                }
-                Console.WriteLine(point.Data.ToString());
-                Show(point.Right, spaces + 5);
-            }
         }
 
         void AddPoint(T data)
@@ -122,28 +101,65 @@ namespace LAB_12_3
             count++;
         }
 
-        public void TransformToArray(Point<T>? point, T[] array, ref int current)
+        public int CountingLeaps(Point<T>? point, int count)
+        {
+            if (point.Right == null && point.Left == null)
+            {
+                Console.WriteLine(point.Data.ToString());
+                return count + 1;
+            }
+            if (point.Left != null && point.Right != null)
+            {
+                count = CountingLeaps(point.Left, count);
+                count = CountingLeaps(point.Right, count);
+            }
+            else if (point.Left != null)
+            {
+                count = CountingLeaps(point.Left, count);
+            }
+            else if (point.Right != null)
+            {
+                count = CountingLeaps(point.Right, count);
+            }
+            return count;
+        }
+
+        void Show(Point<T>? point, int spaces = 5)
         {
             if (point != null)
             {
-                TransformToArray(point.Left, array, ref current);
-                array[current] = point.Data;
-                current++;
-                TransformToArray(point.Right, array, ref current);
+                Show(point.Left, spaces + 5);
+                for (int i = 0; i < spaces; i++)
+                {
+                    Console.Write(" ");
+                }
+                Console.WriteLine(point.Data.ToString());
+                Show(point.Right, spaces + 5);
             }
         }
 
-        public void TransformToFindTree()
+        public void TransformToArray(Point<T>? point, ref T[] array, ref int current)
         {
-            T[] array = new T[count];
-            int current = 0;
-            TransformToArray(root, array, ref current);
-            root = new Point<T>(array[0], "");
-            count = 0;
-            for (int i = 1; i < array.Length; i++)
+            if (point != null)
             {
-                AddPoint(array[i]);
+                TransformToArray(point.Left, ref array, ref current);
+                array[current] = point.Data;
+                current++;
+                TransformToArray(point.Right, ref array, ref current);
             }
         }
+
+        //public void TransformToFindTree()
+        //{
+        //    T[] array = new T[count];
+        //    int current = 0;
+        //    TransformToArray(root, array, ref current);
+        //    root = new Point<T>(array[0], "");
+        //    count = 0;
+        //    for (int i = 1; i < array.Length; i++)
+        //    {
+        //        AddPoint(array[i]);
+        //    }
+        //}
     }
 }

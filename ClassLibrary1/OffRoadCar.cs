@@ -72,13 +72,9 @@ namespace ClassLibrary1
 
         public override string ToString() //Метод для приведения к строке (виртуальная функция)
         {
-            return base.ToString() + $"Наличие полного привода: {Awd}| Тип бездорожья: {TypeRoad}|";
+            return $"OffORadCar({Brend}, {Year}, {Colour}, {Cost}, {Clearance}, {id.number}, {CountSeats}, {MaxSpeed}, {Awd}, {TypeRoad})";
+            //return base.ToString() + $"Наличие полного привода: {Awd}| Тип бездорожья: {TypeRoad}|";
         }
-
-        //public string ToString() //Метод для приведения к строке (виртуальная функция)
-        //{
-        //    return $"OffRoadCar: {id.Number}";
-        //}
 
         public string Show() //Метод для приведения к строке (обычная функция)
         {

@@ -8,9 +8,12 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LAB_12_3
 {
-    internal class MyRedBlackTree<T> where T : IInit, IComparable, new()
+    public class MyRedBlackTree<T> where T : IInit, IComparable, new()
     {
         public Point<T>? root = null;
+
+        public int count = 0;
+        public int Count => count;
 
         public MyRedBlackTree(T[] array)
         {
@@ -19,83 +22,44 @@ namespace LAB_12_3
 
         public void ShowTree()
         {
-            Show2(root);
+            if (root == null)
+            {
+                throw new Exception("Дерево пустое");
+            }
+            Show(root);
         }
 
-        void Show1(Point<T>? point, int spaces = 5)
+        void Show(Point<T>? point, int spaces = 5)
         {
-            string m = "<Нет>";
             if (point.ToString() != "")
             {
-                if (spaces > 50)
-                {
-                    throw new Exception("AAAAAAAAAAAAaa");
-                }
-                Console.WriteLine($"Элемент: {point.Data.ToString()}");
-                m = point.Data.ToString();
-            }
-            if (point.ToString() != "")//point != null )
-            {
-                
-                Console.WriteLine($"Справа от {m}");
-                Show1(point.Right, spaces + 5);
-                Console.WriteLine($"Слева от {m}");
-                Show1(point.Left, spaces + 5);
-            }
-        }
-
-        void Show2(Point<T>? point, int spaces = 5)
-        {
-            if (point.ToString() != "")//point != null )
-            {
-                Show2(point.Right, spaces + 5);
+                Show(point.Right, spaces + 5);
                 for (int i = 0; i < spaces; i++)
                 {
                     Console.Write(" ");
                 }
                 Console.WriteLine($"{point.Data.ToString()}  Цвет: {point.Colour}");
-                Show2(point.Left, spaces + 5);
+                Show(point.Left, spaces + 5);
             }
         }
 
-        public void Remove(T el)
+        public void Clear()
         {
-            Point<T> el1 = new Point<T>(el, "");
-            Point<T> el2 = FindElement(root, el1);
-            if (el2 == null)
-            {
-                Console.WriteLine("Элемент не найден");
-            }
-            else
-            {
-                Console.WriteLine("Элемент найден");
-                if (el2.Left.Data == null && el2.Right.Data == null)
-                {
-                    Point<T> dad = el2.Parent;
-                    if (dad.Left == el2)
-                    {
-                        dad.Left = new Point<T>();
-                    }
-                    else if (dad.Right == el2)
-                    {
-                        dad.Right = new Point<T>();
-                    }
-                    el2.Parent = null;
-                }
-            }
+            root = null;
+            count = 0;
         }
 
-        public void Find(T el)
+        public string Find(T el)
         {
             Point<T> el1 = new Point<T>(el, ""); 
             Point<T> el2 = FindElement(root, el1);
             if (el2 == null)
             {
-                Console.WriteLine("Элемент не найден");
+                return "Элемент не найден";
             }
             else
             {
-                Console.WriteLine("Элемент найден");
+                return "Элемент найден";
             }
         }
 
@@ -115,15 +79,8 @@ namespace LAB_12_3
             {
                 return current;
             }
-            else if (comparing == 1)
-            {
-                Point<T> el = FindElement(current.Left, element);
-                return el;
-            }
-            else
-            {
-                return null;
-            }
+            Point<T> el1 = FindElement(current.Left, element);
+            return el1;
         }
 
         Point<T> FindUncle(Point<T> son)
@@ -158,11 +115,7 @@ namespace LAB_12_3
             }
             else if (current.Colour == "red" && current.Parent.Colour == "red")
             {
-                if (uncle == null)
-                {
-
-                }
-                else if (uncle.Colour == "red")
+                if (uncle.Colour == "red")
                 {
                     current.Parent.Colour = "black";
                     uncle.Colour = "black";
@@ -181,11 +134,14 @@ namespace LAB_12_3
                     {
                         if (dad.Right == son)
                         {
+                            Point<T> preson = son.Left;
+                            dad.Right = preson;
+                            preson.Parent = dad;
+
                             son.Parent = granddad;
                             granddad.Left = son;
                             son.Left = dad;
                             dad.Parent = son;
-                            dad.Right = new Point<T>();
 
                             Point<T> brother = son.Right;
                             son.Right = granddad;
@@ -246,11 +202,14 @@ namespace LAB_12_3
                     {
                         if (dad.Left == son)
                         {
+                            Point<T> preson = son.Right;
+                            dad.Left = preson;
+                            preson.Parent = dad;
+
                             son.Parent = granddad;
                             granddad.Right = son;
                             son.Right = dad;
                             dad.Parent = son;
-                            dad.Left = new Point<T>();
 
                             Point<T> brother = son.Left;
                             son.Left = granddad;
@@ -317,6 +276,10 @@ namespace LAB_12_3
 
         Point<T> MakeTree(T[] array)
         {
+            if (array.Length == 0)
+            {
+                return null;
+            }
             if (array.Distinct().Count() != array.Length)
             {
                 throw new Exception("В переданном массиве есть повторяющиеся элементы. В дереве все элементы должны быть уникальны");
@@ -363,8 +326,7 @@ namespace LAB_12_3
 
                             Change(current, uncle);
                             flag = true;
-                            //Show(root);
-                            //Console.WriteLine("\n\n");
+                            count++;
                         }
                         else if (newItem.Data.CompareTo(current.Data) < 0)
                         {

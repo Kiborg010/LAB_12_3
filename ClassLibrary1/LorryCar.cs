@@ -62,13 +62,9 @@ namespace ClassLibrary1
 
         public override string ToString() //Метод для вывода строки для печати (виртуальная функция)
         {
-            return base.ToString() + $"\nДополнительная информация: |Грузоподъёмность: {Tonnage} тонн|";
+            return $"LorryCar({Brend}, {Year}, {Colour}, {Cost}, {Clearance}, {id.number}, {Tonnage})";
+            //return base.ToString() + $"\nДополнительная информация: |Грузоподъёмность: {Tonnage} тонн|";
         }
-
-        //public string ToString() //Метод для вывода строки для печати (виртуальная функция)
-        //{
-        //    return $"LorryCar: {id.Number}";
-        //}
 
         public string Show() //Метод для вывода строки для печати (обычная функция)
         {
