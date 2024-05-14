@@ -8,7 +8,7 @@ namespace TestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ChangesInRedBlackTreeOne()
         {
             Car car1 = new Car();
             car1.id.number = 1;
@@ -42,7 +42,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void ChangesInRedBlackTreeTwo()
         {
             Car car1 = new Car();
             car1.id.number = 6;
@@ -76,7 +76,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public void ChangesInRedBlackTreeThree()
         {
             Car car1 = new Car();
             car1.id.number = 28;
@@ -110,7 +110,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod4()
+        public void ChangesInRedBlackTreeFour()
         {
             Car car1 = new Car();
             car1.id.number = 8;
@@ -144,7 +144,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod5()
+        public void ChangesInRedBlackTreeFive()
         {
             Car car1 = new Car();
             car1.id.number = 6;
@@ -175,7 +175,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod6()
+        public void ChangesInRedBlackTreeSix()
         {
             Car car1 = new Car();
             car1.id.number = 22;
@@ -203,7 +203,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod7()
+        public void ChangesInRedBlackTreeSeven()
         {
             Car car1 = new Car();
             car1.id.number = 3;
@@ -222,7 +222,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod8()
+        public void ChangesInRedBlackTreeEight()
         {
             Car car1 = new Car();
             car1.id.number = 3;
@@ -241,7 +241,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod9()
+        public void ChangesInRedBlackTreeNine()
         {
             Car car1 = new Car();
             car1.id.number = 6;
@@ -280,7 +280,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod10()
+        public void SameObjectsInRedBlackTree()
         {
             Car car1 = new Car();
             car1.id.number = 20;
@@ -300,7 +300,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod11()
+        public void ChangesInRedBlackTreeTen()
         {
             Car car1 = new Car();
             car1.id.number = 25;
@@ -320,7 +320,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod12()
+        public void NotFoundObjectInRedBlackTree()
         {
             Car car1 = new Car();
             car1.id.number = 25;
@@ -338,7 +338,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod13()
+        public void FoundObjectInRedBlackTree()
         {
             Car car1 = new Car();
             car1.id.number = 25;
@@ -356,27 +356,137 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void TestMethod14()
+        public void ClearRedBlackTree()
         {
-            string message = "";
-            try
-            {
-                MyTree<Car> tree = new MyTree<Car>(-1);
-            }
-            catch (Exception ex)
-            {
-                message = ex.Message;
-            }
-            Console.WriteLine(message);
-            Assert.AreEqual(message, "Количество элементов в дереве не может быть меньше нуля");
+            Car car1 = new Car();
+            car1.id.number = 25;
+            Car car2 = new Car();
+            car2.id.number = 30;
+            Car car3 = new Car();
+            car3.id.number = 20;
+            Car car4 = new Car();
+            car4.id.number = 40;
+            Car[] array = { car1, car2, car3, car4 };
+            MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(array);
+            tree.Clear();
+            Assert.AreEqual(tree.root, null);
         }
 
         [TestMethod]
-        public void TestMethod15()
+        public void ChangesInRedBlackTreeEleven()
         {
-            string message = "";
-            MyTree<Car> tree = new MyTree<Car>(0);
+            Car car1 = new Car();
+            car1.id.number = 25;
+            Car car2 = new Car();
+            car2.id.number = 30;
+            Car car3 = new Car();
+            car3.id.number = 20;
+            Car[] array = { car1, car2, car3};
+            MyTree<Car> tree = new MyTree<Car>(array);
+            Assert.AreEqual(tree.root.Data, car1);
+            Assert.AreEqual(tree.root.Left.Data, car2);
+            Assert.AreEqual(tree.root.Right.Data, car3);
+        }
+
+        [TestMethod]
+        public void ClearUsualTree()
+        {
+            Car car1 = new Car();
+            car1.id.number = 25;
+            Car car2 = new Car();
+            car2.id.number = 30;
+            Car car3 = new Car();
+            car3.id.number = 20;
+            Car[] array = { car1, car2, car3 };
+            MyTree<Car> tree = new MyTree<Car>(array);
+            tree.Clear();
             Assert.AreEqual(tree.root, null);
+        }
+
+        [TestMethod]
+        public void EmptyTree()
+        {
+            MyTree<Car> tree = new MyTree<Car>(null);
+            Assert.AreEqual(tree.root, null);
+        }
+
+        [TestMethod]
+        public void CountLeafsInTreeOne()
+        {
+            Car car1 = new Car();
+            car1.id.number = 6;
+            Car car2 = new Car();
+            car2.id.number = 22;
+            Car car3 = new Car();
+            car3.id.number = 27;
+            Car car4 = new Car();
+            car4.id.number = 1;
+            Car car5 = new Car();
+            car5.id.number = 11;
+            Car car6 = new Car();
+            car6.id.number = 15;
+            Car car7 = new Car();
+            car7.id.number = 25;
+            Car car8 = new Car();
+            car8.id.number = 8;
+            Car car9 = new Car();
+            car9.id.number = 17;
+            Car car10 = new Car();
+            car10.id.number = 13;
+            Car[] array = { car1, car2, car3, car4, car5, car6, car7, car8, car9, car10 };
+            MyTree<Car> tree = new MyTree<Car>(array);
+            int count = 0;
+            int count1 = tree.CountingLeafs(tree.root, count);
+            Assert.AreEqual(count1, 4);
+        }
+
+        [TestMethod]
+        public void CountLeafsInTreeTwo()
+        {
+            Car car1 = new Car();
+            car1.id.number = 27;
+            Car car2 = new Car();
+            car2.id.number = 25;
+            Car car3 = new Car();
+            car3.id.number = 22;
+            Car car4 = new Car();
+            car4.id.number = 17;
+            Car car5 = new Car();
+            car5.id.number = 15;
+            Car car6 = new Car();
+            car6.id.number = 13;
+            Car car7 = new Car();
+            car7.id.number = 11;
+            Car car8 = new Car();
+            car8.id.number = 8;
+            Car car9 = new Car();
+            car9.id.number = 6;
+            Car car10 = new Car();
+            car10.id.number = 1;
+            Car[] array = { car1, car2, car3, car4, car5, car6, car7, car8, car9, car10 };
+            MyTree<Car> tree = new MyTree<Car>(array);
+            int count = 0;
+            int count1 = tree.CountingLeafs(tree.root, count);
+            Assert.AreEqual(count1, 4);
+        }
+
+        [TestMethod]
+        public void TransformTreeToArray()
+        {
+            Car car1 = new Car();
+            car1.id.number = 25;
+            Car car2 = new Car();
+            car2.id.number = 30;
+            Car car3 = new Car();
+            car3.id.number = 20;
+            Car[] array = { car1, car2, car3 };
+            MyTree<Car> tree = new MyTree<Car>(array);
+            Car[] cars = new Car[tree.Count];
+            int index = 0;
+            tree.TransformToArray(tree.root, ref cars, ref index);
+            Assert.AreEqual(cars[0], car2);
+            Assert.AreEqual(cars[1], car1);
+            Assert.AreEqual(cars[2], car3);
         }
     }
 }

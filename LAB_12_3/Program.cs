@@ -47,7 +47,7 @@ namespace LAB_12_3
             string trashAnswer = Console.ReadLine();
         }
 
-        static Car[] CreateListWithRandomCars(int lenght)
+        static Car[] CreateArrayWithRandomCars(int lenght) //Создание массива со случайными типами машин со случайными данными заданной длины
         {
             List<Car> cars = new List<Car>();
             for (int i = 0; i < lenght; i++)
@@ -77,7 +77,7 @@ namespace LAB_12_3
             return cars.ToArray();
         }
 
-        static void PrintTreePB(MyTree<Car> treePB)
+        static void PrintTreePB(MyTree<Car> treePB) //Метод для печати ИСД
         {
             Console.WriteLine("Идеально-сбалансированное дерево:");
             if (treePB.Count != 0)
@@ -98,7 +98,7 @@ namespace LAB_12_3
             Console.WriteLine("\n\n");
         }
 
-        static void PrintTreeRB(MyRedBlackTree<Car> treeRB)
+        static void PrintTreeRB(MyRedBlackTree<Car> treeRB) //Метод для печати КЧД
         {
             Console.WriteLine("Красно-чёрное дерево:");
             if (treeRB.Count != 0)
@@ -121,27 +121,26 @@ namespace LAB_12_3
 
         static void Main(string[] args)
         {
-            WriteCommandsBegin();
-            int numberAnswerOne = -1;
-            Car[] array = new Car[0];
-            MyTree<Car> treePB = new MyTree<Car>(array);
-            MyRedBlackTree<Car> treeRB = new MyRedBlackTree<Car>(array);
-            Point<Car> rootPB = treePB.root;
-            Point<Car> rootRB = treeRB.root;
+            int numberAnswerOne = -1; //Переменная для выбора команды
+            Car[] array = new Car[0]; //Массив с машинами на основе которых создаётся дерево
+            MyTree<Car> treePB = new MyTree<Car>(array); //TreePerfectBalanced - ИСД - идеально-сбалансированное дерево
+            MyRedBlackTree<Car> treeRB = new MyRedBlackTree<Car>(array); //TreeRedBlack - КЧД - красно-чёрное дерево
+            Point<Car> rootPB = treePB.root; //Корень ИСД
+            Point<Car> rootRB = treeRB.root; //Корень КЧД
             while (numberAnswerOne != 9)
             {
                 Console.Clear();
-                WriteCommandsBegin();
-                numberAnswerOne = CorrectInputInt(1, 9, "номер выбранной команды");
+                WriteCommandsBegin();//Печатаем команды в стартовом меню
+                numberAnswerOne = CorrectInputInt(1, 9, "номер выбранной команды"); //Выбор команды
                 switch (numberAnswerOne)
                 {
-                    case 1:
+                    case 1: //Создание ИСД заданной длины
                         {
                             Console.Clear();
                             int lenght = CorrectInputInt(-100, 100, "количество элементов в ИСД");
                             try
                             {
-                                array = CreateListWithRandomCars(lenght);
+                                array = CreateArrayWithRandomCars(lenght);
                                 treePB = new MyTree<Car>(array);
                                 rootPB = treePB.root;
                             }
@@ -153,14 +152,14 @@ namespace LAB_12_3
                             TrashAnswer();
                             break;
                         }
-                    case 2:
+                    case 2: //Печать ИСД
                         {
                             Console.Clear();
                             PrintTreePB(treePB);
                             TrashAnswer();
                             break;
                         }
-                    case 3:
+                    case 3: //Печать и подсчёт листьев ИСД
                         {
                             Console.Clear();
                             PrintTreePB(treePB);
@@ -171,13 +170,13 @@ namespace LAB_12_3
                             else
                             {
                                 Console.WriteLine("Листья: ");
-                                int count = treePB.CountingLeaps(rootPB, 0);
+                                int count = treePB.CountingLeafs(rootPB, 0);
                                 Console.WriteLine($"\n\nКоличество листьев в дереве: {count}");
                             }
                             TrashAnswer();
                             break;
                         }
-                    case 4:
+                    case 4: //Создание КЧД на основе ИСД
                         {
                             Console.Clear();
                             PrintTreePB(treePB);
@@ -205,14 +204,14 @@ namespace LAB_12_3
                             TrashAnswer();
                             break;
                         }
-                    case 5:
+                    case 5: //Печать КЧД
                         {
                             Console.Clear();
                             PrintTreeRB(treeRB);
                             TrashAnswer();
                             break;
                         }
-                    case 6:
+                    case 6: //Печать ИСД и КЧД
                         {
                             Console.Clear();
                             PrintTreePB(treePB);
@@ -220,7 +219,7 @@ namespace LAB_12_3
                             TrashAnswer();
                             break;
                         }
-                    case 7:
+                    case 7: //Удаление ИСД из памяти
                         {
                             Console.Clear();
                             if (treePB.Count != 0)
@@ -235,7 +234,7 @@ namespace LAB_12_3
                             TrashAnswer();
                             break;
                         }
-                    case 8:
+                    case 8: //Удаление КЧД из памяти
                         {
                             Console.Clear();
                             if (treeRB.Count != 0)
@@ -250,7 +249,7 @@ namespace LAB_12_3
                             TrashAnswer();
                             break;
                         }
-                    case 9:
+                    case 9: //Завершение работы
                         {
                             Console.Clear();
                             Console.WriteLine("Завершение работы");

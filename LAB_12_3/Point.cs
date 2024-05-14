@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace LAB_12_3
 {
-    public class Point<T> where T: IComparable
+    public class Point<T> where T: IComparable //Класс для точки-узла для использования в ИСД и КЧД
     {
-        public T? Data { get; set; }
-        public Point<T>? Left { get; set; }
-        public Point<T>? Right { get; set; }
-        public Point<T>? Parent { get; set; }
+        public T? Data { get; set; } //Данные в точке
+        public Point<T>? Left { get; set; } //Левая связь. Ссылка на точку слева на уровень ниже
+        public Point<T>? Right { get; set; } //Правая связь. Ссылка на точку справа на уровень ниже
+        public Point<T>? Parent { get; set; } //Родительская связь. Ссылка на точку выше. Справа или слева в данном случае неважно
 
-        public string colour;
-        public string? Colour 
+        public string colour; 
+        public string? Colour //Свойство для определения цвета
         {
             get
             {
@@ -22,7 +22,7 @@ namespace LAB_12_3
             }
             set
             {
-                if (value == "red")
+                if (value == "red") //Цвет может быть либо красный, либо чёрный, либо никакой
                 {
                     colour = "red";
                 }
@@ -37,7 +37,7 @@ namespace LAB_12_3
             }
         }
 
-        public Point()
+        public Point() //Конструктор без параметров
         {
             this.Data = default(T);
             this.Left = null;
@@ -46,7 +46,7 @@ namespace LAB_12_3
             this.Parent = null;
         }
 
-        public Point(T data, string colour)
+        public Point(T data, string colour) //Конструктор с параметрами
         {
             this.Data = data;
             this.Left = null;
@@ -55,7 +55,7 @@ namespace LAB_12_3
             this.Parent = null;
         }
 
-        public override string? ToString()
+        public override string? ToString() //Метод для печати точки
         {
             if (Data == null)
             {
@@ -63,13 +63,13 @@ namespace LAB_12_3
             }
             else
             {
-                return Data.ToString();
+                return Data.ToString(); //Печатаем информацию внутри точки
             }
         }
 
-        public int CompareTo(Point<T> other)
+        public int CompareTo(Point<T> other) //Метод для сравнения точек
         {
-            return Data.CompareTo(other.Data);
+            return Data.CompareTo(other.Data); //Сравниваются информации внутри точек
         }
     }
 }
