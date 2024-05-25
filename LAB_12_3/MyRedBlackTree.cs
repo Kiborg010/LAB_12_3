@@ -8,22 +8,28 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LAB_12_3
 {
-    public class MyRedBlackTree<T> where T : IInit, IComparable, new() //Метод для создания КЧД
+    public class MyRedBlackTree<T> where T : IInit, ICloneable, IComparable, new() //Метод для создания КЧД
     {
         public Point<T>? root = null; //Корень
 
         public int count = 0; //Количество элементов в дереве
         public int Count => count;
 
-        public MyRedBlackTree(T[] array) //Метод для старта создания дерева
+        public MyRedBlackTree(T[] array1) //Метод для старта создания дерева
         {
-            if (array is null || array.Length == 0) //Если массив ноль или пустой, то корень делаем ноль
+            if (array1 is null || array1.Length == 0) //Если массив ноль или пустой, то корень делаем ноль
             {
                 root = null;
             }
             else 
             {
-                root = MakeTree(array); //В ином случае создаём дерево на основе массива
+                int length = array1.Length; //В ином случае создаём дерево на основе массива
+                T[] array = new T[length]; //Сначала надо сделать глубокое копирование массива
+                for (int i = 0; i < length; i++)
+                {
+                    array[i] = (T)array1[i].Clone();
+                }
+                root = MakeTree(array); 
             }
         }
 
@@ -52,8 +58,15 @@ namespace LAB_12_3
 
         public void Clear() //Метод для удаления дереве
         {
-            root = null; //Корень обнуляется
-            count = 0; //Количество обнуляется
+            if (root != null) //Если корень не пустой
+            {
+                Point<T> leftSon = root.Left;
+                Point<T> rightSon = root.Right;
+                root = null; //Корень обнуляется
+                leftSon.Parent = null; //Удаляем ссылку на отца у правого и левого сыновей
+                rightSon.Parent = null;
+                count = 0; //Количество обнуляется
+            }
         }
 
         public string Find(T el) //Метод для определения наличия элемента в дереве
@@ -304,6 +317,7 @@ namespace LAB_12_3
             begin.Left = new Point<T>(); //Создаём слева и справа листья-null
             begin.Right = new Point<T>(); //
             array = array.Skip(1).ToArray(); //Первый элемент из массива убираем, так как уже записали
+            count = 1;
             foreach (T el in array)
             {
                 Point<T> newItem = new Point<T>(el, "red"); //Создаём элемент-точку для добавления

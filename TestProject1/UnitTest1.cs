@@ -28,17 +28,16 @@ namespace TestProject1
             car8.id.number = 8;
             Car[] array = { car1, car2, car3, car4, car5, car6, car7, car8 };
             MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(array);
-
             Point<Car> root = tree.root;
             
-            Assert.IsTrue(tree.root.Data == car4);
-            Assert.IsTrue(root.Left.Data == car2);
-            Assert.IsTrue(root.Right.Data == car6);
-            Assert.IsTrue(root.Left.Left.Data == car1);
-            Assert.IsTrue(root.Left.Right.Data == car3);
-            Assert.IsTrue(root.Right.Left.Data == car5);
-            Assert.IsTrue(root.Right.Right.Data == car7);
-            Assert.IsTrue(root.Right.Right.Right.Data == car8);
+            Assert.IsTrue(tree.root.Data.Equals(car4));
+            Assert.IsTrue(root.Left.Data.Equals(car2));
+            Assert.IsTrue(root.Right.Data.Equals(car6));
+            Assert.IsTrue(root.Left.Left.Data.Equals(car1));
+            Assert.IsTrue(root.Left.Right.Data.Equals(car3));
+            Assert.IsTrue(root.Right.Left.Data.Equals(car5));
+            Assert.IsTrue(root.Right.Right.Data.Equals(car7));
+            Assert.IsTrue(root.Right.Right.Right.Data.Equals(car8));
         }
 
         [TestMethod]
@@ -62,17 +61,16 @@ namespace TestProject1
             car8.id.number = 28;
             Car[] array = { car1, car2, car3, car4, car5, car6, car7, car8 };
             MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(array);
-
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car3);
-            Assert.IsTrue(root.Left.Data == car1);
-            Assert.IsTrue(root.Right.Data == car6);
-            Assert.IsTrue(root.Left.Left.Data == car2);
-            Assert.IsTrue(root.Left.Right.Data == car4);
-            Assert.IsTrue(root.Right.Left.Data == car5);
-            Assert.IsTrue(root.Right.Right.Data == car7);
-            Assert.IsTrue(root.Right.Right.Right.Data == car8);
+            Assert.IsTrue(tree.root.Data.Equals(car3));
+            Assert.IsTrue(root.Left.Data.Equals(car1));
+            Assert.IsTrue(root.Right.Data.Equals(car6));
+            Assert.IsTrue(root.Left.Left.Data.Equals(car2));
+            Assert.IsTrue(root.Left.Right.Data.Equals(car4));
+            Assert.IsTrue(root.Right.Left.Data.Equals(car5));
+            Assert.IsTrue(root.Right.Right.Data.Equals(car7));
+            Assert.IsTrue(root.Right.Right.Right.Data.Equals(car8));
         }
 
         [TestMethod]
@@ -99,14 +97,14 @@ namespace TestProject1
 
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car4);
-            Assert.IsTrue(root.Left.Data == car5);
-            Assert.IsTrue(root.Right.Data == car2);
-            Assert.IsTrue(root.Left.Left.Data == car7);
-            Assert.IsTrue(root.Left.Right.Data == car6);
-            Assert.IsTrue(root.Right.Left.Data == car3);
-            Assert.IsTrue(root.Right.Right.Data == car1);
-            Assert.IsTrue(root.Left.Left.Right.Data == car8);
+            Assert.IsTrue(tree.root.Data.Equals(car4));
+            Assert.IsTrue(root.Left.Data.Equals(car5));
+            Assert.IsTrue(root.Right.Data.Equals(car2));
+            Assert.IsTrue(root.Left.Left.Data.Equals(car7));
+            Assert.IsTrue(root.Left.Right.Data.Equals(car6));
+            Assert.IsTrue(root.Right.Left.Data.Equals(car3));
+            Assert.IsTrue(root.Right.Right.Data.Equals(car1));
+            Assert.IsTrue(root.Left.Left.Right.Data.Equals(car8));
         }
 
         [TestMethod]
@@ -133,14 +131,14 @@ namespace TestProject1
 
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car2);
-            Assert.IsTrue(root.Left.Data == car6);
-            Assert.IsTrue(root.Right.Data == car5);
-            Assert.IsTrue(root.Left.Left.Data == car4);
-            Assert.IsTrue(root.Left.Right.Data == car1);
-            Assert.IsTrue(root.Right.Left.Data == car3);
-            Assert.IsTrue(root.Right.Right.Data == car7);
-            Assert.IsTrue(root.Right.Right.Right.Data == car8);
+            Assert.IsTrue(tree.root.Data.Equals(car2));
+            Assert.IsTrue(root.Left.Data.Equals(car6));
+            Assert.IsTrue(root.Right.Data.Equals(car5));
+            Assert.IsTrue(root.Left.Left.Data.Equals(car4));
+            Assert.IsTrue(root.Left.Right.Data.Equals(car1));
+            Assert.IsTrue(root.Right.Left.Data.Equals(car3));
+            Assert.IsTrue(root.Right.Right.Data.Equals(car7));
+            Assert.IsTrue(root.Right.Right.Right.Data.Equals(car8));
         }
 
         [TestMethod]
@@ -165,13 +163,13 @@ namespace TestProject1
 
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car1);
-            Assert.IsTrue(root.Left.Data == car2);
-            Assert.IsTrue(root.Right.Data == car3);
-            Assert.IsTrue(root.Right.Right.Data == car7);
-            Assert.IsTrue(root.Right.Left.Data == car4);
-            Assert.IsTrue(root.Right.Right.Right.Data == car6);
-            Assert.IsTrue(root.Right.Right.Left.Data == car5);
+            Assert.IsTrue(tree.root.Data.Equals(car1));
+            Assert.IsTrue(root.Left.Data.Equals(car2));
+            Assert.IsTrue(root.Right.Data.Equals(car3));
+            Assert.IsTrue(root.Right.Right.Data.Equals(car7));
+            Assert.IsTrue(root.Right.Left.Data.Equals(car4));
+            Assert.IsTrue(root.Right.Right.Right.Data.Equals(car6));
+            Assert.IsTrue(root.Right.Right.Left.Data.Equals(car5));
         }
 
         [TestMethod]
@@ -194,12 +192,12 @@ namespace TestProject1
 
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car2);
-            Assert.IsTrue(root.Left.Data == car3);
-            Assert.IsTrue(root.Right.Data == car1);
-            Assert.IsTrue(root.Left.Right.Data == car4);
-            Assert.IsTrue(root.Left.Left.Data == car5);
-            Assert.IsTrue(root.Left.Left.Right.Data == car6);
+            Assert.IsTrue(tree.root.Data.Equals(car2));
+            Assert.IsTrue(root.Left.Data.Equals(car3));
+            Assert.IsTrue(root.Right.Data.Equals(car1));
+            Assert.IsTrue(root.Left.Right.Data.Equals(car4));
+            Assert.IsTrue(root.Left.Left.Data.Equals(car5));
+            Assert.IsTrue(root.Left.Left.Right.Data.Equals(car6));
         }
 
         [TestMethod]
@@ -216,9 +214,9 @@ namespace TestProject1
 
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car3);
-            Assert.IsTrue(root.Left.Data == car2);
-            Assert.IsTrue(root.Right.Data == car1);
+            Assert.IsTrue(tree.root.Data.Equals(car3));
+            Assert.IsTrue(root.Left.Data.Equals(car2));
+            Assert.IsTrue(root.Right.Data.Equals(car1));
         }
 
         [TestMethod]
@@ -235,9 +233,9 @@ namespace TestProject1
 
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car3);
-            Assert.IsTrue(root.Left.Data == car1);
-            Assert.IsTrue(root.Right.Data == car2);
+            Assert.IsTrue(tree.root.Data.Equals(car3));
+            Assert.IsTrue(root.Left.Data.Equals(car1));
+            Assert.IsTrue(root.Right.Data.Equals(car2));
         }
 
         [TestMethod]
@@ -267,16 +265,16 @@ namespace TestProject1
             MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(array);
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car5);
-            Assert.IsTrue(root.Left.Data == car1);
-            Assert.IsTrue(root.Right.Data == car2);
-            Assert.IsTrue(root.Left.Left.Data == car4);
-            Assert.IsTrue(root.Left.Right.Data == car8);
-            Assert.IsTrue(root.Right.Left.Data == car6);
-            Assert.IsTrue(root.Right.Right.Data == car3);
-            Assert.IsTrue(root.Right.Left.Left.Data == car10);
-            Assert.IsTrue(root.Right.Left.Right.Data == car9);
-            Assert.IsTrue(root.Right.Right.Left.Data == car7);
+            Assert.IsTrue(tree.root.Data.Equals(car5));
+            Assert.IsTrue(root.Left.Data.Equals(car1));
+            Assert.IsTrue(root.Right.Data.Equals(car2));
+            Assert.IsTrue(root.Left.Left.Data.Equals(car4));
+            Assert.IsTrue(root.Left.Right.Data.Equals(car8));
+            Assert.IsTrue(root.Right.Left.Data.Equals(car6));
+            Assert.IsTrue(root.Right.Right.Data.Equals(car3));
+            Assert.IsTrue(root.Right.Left.Left.Data.Equals(car10));
+            Assert.IsTrue(root.Right.Left.Right.Data.Equals(car9));
+            Assert.IsTrue(root.Right.Right.Left.Data.Equals(car7));
         }
 
         [TestMethod]
@@ -314,9 +312,9 @@ namespace TestProject1
             MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(array);
             Point<Car> root = tree.root;
 
-            Assert.IsTrue(tree.root.Data == car1);
-            Assert.IsTrue(root.Left.Data == car4);
-            Assert.IsTrue(root.Right.Data == car3);
+            Assert.IsTrue(tree.root.Data.Equals(car1));
+            Assert.IsTrue(root.Left.Data.Equals(car4));
+            Assert.IsTrue(root.Right.Data.Equals(car3));
         }
 
         [TestMethod]
@@ -404,9 +402,16 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void EmptyTree()
+        public void EmptyMyTree()
         {
             MyTree<Car> tree = new MyTree<Car>(null);
+            Assert.AreEqual(tree.root, null);
+        }
+
+        [TestMethod]
+        public void EmptyMyRedBlackTree()
+        {
+            MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(null);
             Assert.AreEqual(tree.root, null);
         }
 
@@ -487,6 +492,32 @@ namespace TestProject1
             Assert.AreEqual(cars[0], car2);
             Assert.AreEqual(cars[1], car1);
             Assert.AreEqual(cars[2], car3);
+        }
+
+        [TestMethod]
+        public void TestCloneObjectsInMyRedBlackTree()
+        {
+            Car car1 = new Car();
+            car1.id.number = 25;
+            Car[] array = {car1};
+            MyRedBlackTree<Car> tree = new MyRedBlackTree<Car>(array);
+            int first = tree.root.Data.id.number;
+            array[0].id.number = 13;
+            int second = tree.root.Data.id.number;
+            Assert.AreEqual(first, second);
+        }
+
+        [TestMethod]
+        public void TestCloneObjectInMyTree()
+        {
+            Car car1 = new Car();
+            car1.id.number = 25;
+            Car[] array = { car1 };
+            MyTree<Car> tree = new MyTree<Car>(array);
+            int first = tree.root.Data.id.number;
+            array[0].id.number = 13;
+            int second = tree.root.Data.id.number;
+            Assert.AreEqual(first, second);
         }
     }
 }

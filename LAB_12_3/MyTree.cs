@@ -9,20 +9,26 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LAB_12_3
 {
-    public class MyTree<T> where T : IInit, IComparable, new() //Класс для создания ИСД
+    public class MyTree<T> where T : IInit, ICloneable, IComparable, new() //Класс для создания ИСД
     {
         public Point<T>? root = null; //Точка корень
         public int count = 0; //Для записи количества элементов
         public int Count => count;
-        public MyTree(T[] array) //Конструктор для создания дерева. Дерево создаётся на основе массива
-        { 
-            if (array is null || array.Length == 0) //Если массив пустой, то и корень пустой
+        public MyTree(T[] array1) //Конструктор для создания дерева. Дерево создаётся на основе массива
+        {
+            if (array1 is null || array1.Length == 0) //Если массив пустой, то и корень пустой
             {
                 root = null;
             }
             else
             {
-                root = MakeTree(array); //Иначе запускаем метод создания дерева
+                int length = array1.Length;//Иначе запускаем метод создания дерева
+                T[] array = new T[length]; //Предварительно сделав глубокое копирование изначального массива
+                for (int i = 0; i < length; i++)
+                {
+                    array[i] = (T)array1[i].Clone();
+                }
+                root = MakeTree(array); 
             }
         }
 
@@ -55,8 +61,9 @@ namespace LAB_12_3
             count = 0; //Количество элементов в дереве тоже ноль
         }
 
-        Point<T> MakeTree(T[] array) //Метод для создания дерева на основе массива. Метод рекурсивный
+        Point<T> MakeTree(T[] array1) //Метод для создания дерева на основе массива. Метод рекурсивный
         {
+            T[] array = (T[])array1.Clone();
             if (array.Length == 0) //Если в массиве элементов нет, то возвращаем ноль
             {
                 return null;
