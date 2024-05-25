@@ -94,10 +94,6 @@ namespace LAB_12_3
                 count = CountingLeafs(point.Left, count); //Запускаем подсчёт листьев в левой ветви
                 count = CountingLeafs(point.Right, count); //Запускаем подсчёт листьев в правой ветви
             }
-            else if (point.Left != null) //У точки есть левая ветвь, а правой нет.
-            {
-                count = CountingLeafs(point.Left, count); //Запускаем подсчёт листьев в левой ветви
-            }
             else if (point.Right != null) //У точки есть правая ветвь, а левой нет
             {
                 count = CountingLeafs(point.Right, count); //Запускаем подсчёт листьев в правой ветви
