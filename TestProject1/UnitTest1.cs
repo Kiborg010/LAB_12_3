@@ -280,11 +280,14 @@ namespace TestProject1
         [TestMethod]
         public void SameObjectsInRedBlackTree()
         {
+            //Car car1 = new Car();
+            //car1.id.number = 20;
+            //Car car2 = new Car();
+            //car2.id.number = 25;
+            //Car[] array = { car1, car2, car1, car2};
             Car car1 = new Car();
             car1.id.number = 20;
-            Car car2 = new Car();
-            car2.id.number = 25;
-            Car[] array = { car1, car2, car1, car2};
+            Car[] array = { car1, car1};
             string message = "";
             try
             {
@@ -518,6 +521,22 @@ namespace TestProject1
             array[0].id.number = 13;
             int second = tree.root.Data.id.number;
             Assert.AreEqual(first, second);
+        }
+
+        [TestMethod]
+        public void ShowEmptyMyTree()
+        {
+            MyTree<Car> tree = new MyTree<Car>(null);
+            string message = "";
+            try
+            {
+                tree.ShowTree();
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            Assert.AreEqual(message, "Дерево пустое");
         }
     }
 }

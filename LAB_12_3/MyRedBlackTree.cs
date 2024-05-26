@@ -21,6 +21,10 @@ namespace LAB_12_3
             {
                 root = null;
             }
+            else if (array1.Distinct().Count() != array1.Length) //Проверка на то, есть ли повторяющиеся элементы в массиве
+            {
+                throw new Exception("В переданном массиве есть повторяющиеся элементы. В дереве все элементы должны быть уникальны");
+            }
             else 
             {
                 int length = array1.Length; //В ином случае создаём дерево на основе массива
@@ -308,10 +312,6 @@ namespace LAB_12_3
 
         Point<T> MakeTree(T[] array) //Метод для создания дерева
         { //Дерево создаётся на основе массива
-            if (array.Distinct().Count() != array.Length) //Проверка на то, есть ли повторяющиеся элементы в массиве
-            {
-                throw new Exception("В переданном массиве есть повторяющиеся элементы. В дереве все элементы должны быть уникальны");
-            }
             Point<T> begin = new Point<T>(array[0], "black"); //Создаём начало
             root = begin; //Задаём корень
             begin.Left = new Point<T>(); //Создаём слева и справа листья-null
